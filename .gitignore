@@ -1,2 +1,9 @@
-/node_modules
+# OS X
 .DS_store
+Icon?
+._*
+
+# npm
+node_modules
+*.log
+*.gz
