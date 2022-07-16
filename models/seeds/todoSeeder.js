@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Todo = require('../todo')
 
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true }) //connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI) //connect to MongoDB
 
 const db  = mongoose.connection
 db.on('error',()=>{
@@ -17,3 +17,4 @@ db.once('open', ()=>{
 
     console.log('done.')
 })
+//, {useNewUrlParser: true, useUnifiedTopology: true }
