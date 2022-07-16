@@ -2,7 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 
 const exphbs = require("express-handlebars")
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser")
 
 const Todo = require("./models/todo")
 
@@ -44,13 +44,17 @@ app.get("/todos/new", (req, res) => {
 app.post("/todos", (req, res) => {
   const name = req.body.name
 
-  // const todo = new Todo({ name })
-  // return todo.save()
-  //   .then(() => res.redirect("/"))
-  //   .catch((err) => console.log(err))
   return Todo.create({ name })
     .then(() => res.redirect("/"))
     .catch((err) => console.log(err))
+})
+
+app.get("/todos/:id", (req, res) => {
+  const id = req.params.id
+  return Todo.findById(id)
+    .lean()
+    .then(todo => res.render("detail", { todo }))
+    .catch(err => console.log(err))
 })
 
 app.listen(port, () => {
