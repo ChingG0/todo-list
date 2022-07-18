@@ -31,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get("/", (req, res) => {
   Todo.find()
     .lean()
+    .sort({ name: 'asc' }) //reverse = desc
     .then((todos) => res.render("index", { todos }))
     .catch((err) => {
       console.error(err)
@@ -84,7 +85,7 @@ app.post("/todos/:id/edit", (req, res) => {
 
 app.post("/todos/:id/delete", (req, res) => {
   const id = req.params.id
-  
+
   return Todo.findById(id)
     .then((todo) => todo.remove())
     .then(() => res.redirect("/"))
